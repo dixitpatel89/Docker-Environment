@@ -1,0 +1,21 @@
+version: "3"
+services:
+  paw.wars.app:
+#    container_name: paw.wars.app
+#    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - mongo
+    command: npm start
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
